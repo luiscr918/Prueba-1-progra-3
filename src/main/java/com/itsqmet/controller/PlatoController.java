@@ -2,13 +2,12 @@ package com.itsqmet.controller;
 
 import com.itsqmet.entity.Plato;
 import com.itsqmet.service.PlatoService;
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 import java.util.Optional;
@@ -33,9 +32,15 @@ public class PlatoController {
         return "pages/registroPlato";
     }
     @PostMapping("/guardar-plato")
-    public String guardarPlato(Plato plato){
-        platoService.guardarPlato(plato);
-        return "redirect:/platos";
+    public String guardarPlato(@Valid @ModelAttribute Plato plato,
+                               BindingResult bindingResult,Model model){
+        if (bindingResult.hasErrors()){
+            model.addAttribute("errores",bindingResult.getAllErrors());
+            return "pages/registroPlato";
+        }else{
+            platoService.guardarPlato(plato);
+            return "redirect:/platos";
+        }
     }
     //Actualizar Plato
     @GetMapping("/actualizar-plato/{id}")

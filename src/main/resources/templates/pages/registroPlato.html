@@ -16,6 +16,7 @@
             <h1 class="text-5xl font-bold text-left tracking-wide">Agrega tu plato favorito</h1>
             <p class="text-3xl my-4">Llena los datos necesarios para añadir un nuevo plato al menú. ¡Es rápido y sencillo!</p>
         </div>
+
     </div>
     <div class="lg:w-1/2 w-full flex items-center justify-center text-center md:px-16 px-0 z-0" style="background-color: #161616;">
         <div class="absolute lg:hidden z-10 inset-0 bg-gray-500 bg-no-repeat bg-cover items-center" style="background-image: url(https://wallpapers.com/images/hd/food-table-1j6ik0elenqlwh4k.jpg);">
@@ -28,12 +29,21 @@
                 </div>
                 <div class="pb-2 pt-4">
                     <input th:field="*{nombre}" type="text"  id="nombre" placeholder="Ingrese el nombre del plato" class="block w-full p-4 text-lg rounded-sm bg-black">
+                    <span
+                            th:if="${#fields.hasErrors('nombre')}" th:errores="*{nombre}"
+                            class="block mb-2 text-sm font-medium text-red-600">Error de nombre</span>
                 </div>
                 <div class="pb-2 pt-4">
                     <input th:field="*{descripcion}" type="text"  id="descripcion" placeholder="Ingrese la descripcion del plato" class="block w-full p-4 text-lg rounded-sm bg-black">
+                    <span
+                            th:if="${#fields.hasErrors('descripcion')}" th:errores="*{descripcion}"
+                            class="block mb-2 text-sm font-medium text-red-600">Error de descripcion</span>
                 </div>
                 <div class="pb-2 pt-4">
                     <input th:field="*{precio}" type="text"  id="precio" placeholder="Ingrese el precio del plato" class="block w-full p-4 text-lg rounded-sm bg-black">
+                    <span
+                            th:if="${#fields.hasErrors('precio')}" th:errores="*{precio}"
+                            class="block mb-2 text-sm font-medium text-red-600">Error de precio</span>
                 </div>
                 <label  class=" text-xs  text-white ">Categoria</label>
                 <!--Categorias entrada,principal,postre-->
